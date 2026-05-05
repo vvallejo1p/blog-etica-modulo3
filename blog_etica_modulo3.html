@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Académico — Ética y Ciudadanía Módulo 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --cream: #ede8d8;
+    --accent: #c8502a;
+    --accent2: #2a6e4e;
+    --accent3: #3a5a8a;
+    --gold: #c9a84c;
+    --muted: #6b6560;
+    --border: #d4c9b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  nav .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 0 0.9rem;
+    height: 56px;
+    line-height: 56px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s, background 0.2s;
+    border-right: 1px solid #2a2a3e;
+  }
+
+  nav ul li a:hover { color: #fff; background: rgba(200,80,42,0.15); }
+
+  /* HERO */
+  .hero {
+    margin-top: 56px;
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 0; bottom: 0;
+    width: 120px;
+    background: var(--ink);
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-desc {
+    color: #aaa;
+    font-size: 1rem;
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .hero-meta span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: #666;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-meta strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .hero-right {
+    background: var(--cream);
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5rem;
+  }
+
+  .index-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .index-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .index-list li a {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .index-list li a:hover {
+    color: var(--accent);
+    padding-left: 0.5rem;
+  }
+
+  .index-list li a .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    min-width: 28px;
+  }
+
+  .index-list li a .emoji { font-size: 1.1rem; }
+
+  .index-list li a .arrow {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--border);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .index-list li a:hover .arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin: 0 0 4rem;
+  }
+
+  .tema-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .tema-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--border);
+    line-height: 1;
+    font-weight: 900;
+    margin-top: -0.5rem;
+  }
+
+  .tema-header-content {}
+
+  .tema-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .tema-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .tema-sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .content-block {
+    background: white;
+    border-radius: 2px;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--border);
+  }
+
+  .content-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-block p {
+    font-size: 0.97rem;
+    color: #3a3a4a;
+    line-height: 1.85;
+    margin-bottom: 1rem;
+  }
+
+  .content-block p:last-child { margin-bottom: 0; }
+
+  .accent-block {
+    border-left-color: var(--accent);
+  }
+
+  .green-block {
+    border-left-color: var(--accent2);
+  }
+
+  .blue-block {
+    border-left-color: var(--accent3);
+  }
+
+  /* RESOURCES */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .resource-card {
+    background: var(--cream);
+    border-radius: 2px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .resource-card::before {
+    content: attr(data-type);
+    position: absolute;
+    top: 0.8rem; right: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1px;
+  }
+
+  .resource-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .resource-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .resource-card p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .resource-card a {
+    color: var(--accent3);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .resource-card a:hover { text-decoration: underline; }
+
+  /* EXAMPLE BOX */
+  .example-box {
+    background: var(--ink);
+    color: #e0e0e0;
+    padding: 2rem 2.5rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .example-box::before {
+    content: 'Ejemplo de aplicación';
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .example-box p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #ccc;
+  }
+
+  /* WHY SECTION */
+  .why-box {
+    border: 1px solid var(--accent);
+    padding: 1.8rem 2.2rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    background: rgba(200,80,42,0.03);
+  }
+
+  .why-box h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .why-box p {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  /* SECTION BG ALTERNATES */
+  .bg-dark {
+    background: var(--ink);
+    color: #e0e0e0;
+  }
+
+  .bg-dark .section { color: #e0e0e0; }
+  .bg-dark .content-block { background: rgba(255,255,255,0.05); border-left-color: var(--gold); }
+  .bg-dark .content-block h3 { color: var(--gold); border-bottom-color: rgba(255,255,255,0.1); }
+  .bg-dark .content-block p { color: #ccc; }
+  .bg-dark .tema-num { color: rgba(255,255,255,0.06); }
+  .bg-dark .tema-header h2 { color: #fff; }
+  .bg-dark .section-divider { background: linear-gradient(90deg, var(--gold), transparent); }
+  .bg-dark .resource-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+  .bg-dark .resource-card h4 { color: #e0e0e0; }
+  .bg-dark .resource-card p { color: #888; }
+  .bg-dark .resource-card::before { background: rgba(255,255,255,0.08); color: #888; }
+  .bg-dark .why-box { background: rgba(201,168,76,0.06); border-color: var(--gold); }
+  .bg-dark .why-box h3 { color: var(--gold); }
+  .bg-dark .why-box p { color: #ccc; }
+  .bg-dark .example-box { background: rgba(255,255,255,0.04); }
+
+  .bg-cream { background: var(--cream); }
+
+  /* JUSTIFICACION */
+  .justif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .justif-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 2px;
+    border-top: 3px solid var(--accent);
+  }
+
+  .justif-card.green { border-top-color: var(--accent2); }
+  .justif-card.blue { border-top-color: var(--accent3); }
+  .justif-card.gold { border-top-color: var(--gold); }
+  .justif-card.ink { border-top-color: var(--ink); }
+
+  .justif-card .emoji { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+  .justif-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .justif-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* SISTEMA ETICO */
+  .sistema-box {
+    background: var(--ink);
+    color: white;
+    padding: 3rem;
+    border-radius: 2px;
+    margin-top: 3rem;
+  }
+
+  .sistema-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .sistema-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sistema-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid var(--gold);
+  }
+
+  .sistema-item .tema-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .sistema-item p { font-size: 0.9rem; color: #ccc; }
+  .sistema-item strong { color: white; }
+
+  /* CONCLUSIONES */
+  .concl-block {
+    border-left: 4px solid var(--gold);
+    padding: 2rem 2.5rem;
+    background: white;
+    margin-bottom: 2rem;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .concl-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .concl-block p {
+    font-size: 0.97rem;
+    color: #3a3a4a;
+    line-height: 1.85;
+    margin-bottom: 0.8rem;
+  }
+
+  /* REFERENCIAS */
+  .ref-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ref-list li {
+    padding: 1.2rem 1.5rem;
+    background: white;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #3a3a4a;
+    border-left: 2px solid var(--border);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0d0d18;
+    color: #444;
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  footer strong { color: var(--gold); }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 1.2rem 2rem;
+    background: rgba(201,168,76,0.06);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    margin: 2rem 0;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .bg-dark blockquote {
+    color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: #555;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* FADE IN ANIMATION */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 4rem 2rem; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 3rem 2rem; }
+    .resources-grid { grid-template-columns: 1fr; }
+    .justif-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">LSHU1802 — Ética y Ciudadanía</div>
+  <ul>
+    <li><a href="#t11">T11</a></li>
+    <li><a href="#t12">T12</a></li>
+    <li><a href="#t13">T13</a></li>
+    <li><a href="#t14">T14</a></li>
+    <li><a href="#t15">T15</a></li>
+    <li><a href="#justif">Justif.</a></li>
+    <li><a href="#conclusiones">Concl.</a></li>
+    <li><a href="#referencias">Refs.</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-tag">Blog Académico · Módulo 3</div>
+    <h1>Ética, Ciudadanía<br>y <em>Humanismo</em><br>en el siglo XXI</h1>
+    <p class="hero-desc">Una reflexión honesta sobre los temas que definen al profesionista ético de hoy: sus derechos, su participación, sus decisiones, su empatía y su responsabilidad con el futuro.</p>
+    <div class="hero-meta">
+      <span><strong>Autor:</strong> Patricio · Ingeniería Mecatrónica</span>
+      <span><strong>Institución:</strong> Tecmilenio Cuernavaca</span>
+      <span><strong>Materia:</strong> Desarrollo Humano · LSHU1802</span>
+      <span><strong>Módulo:</strong> 3 · Temas 11–15</span>
+    </div>
+    <div class="scroll-hint">↓ Explorar</div>
+  </div>
+  <div class="hero-right">
+    <div class="index-title">Índice de contenido</div>
+    <ul class="index-list">
+      <li><a href="#t11"><span class="num">01</span><span class="emoji">📜</span> Códigos de alcance universal<span class="arrow">→</span></a></li>
+      <li><a href="#t12"><span class="num">02</span><span class="emoji">🗳️</span> Ciudadanía y trabajo político<span class="arrow">→</span></a></li>
+      <li><a href="#t13"><span class="num">03</span><span class="emoji">⚖️</span> La carga teleológica<span class="arrow">→</span></a></li>
+      <li><a href="#t14"><span class="num">04</span><span class="emoji">🌍</span> Entendimiento intercultural<span class="arrow">→</span></a></li>
+      <li><a href="#t15"><span class="num">05</span><span class="emoji">🌱</span> Desarrollo sustentable<span class="arrow">→</span></a></li>
+      <li><a href="#justif"><span class="num">06</span><span class="emoji">💡</span> Justificación de la selección<span class="arrow">→</span></a></li>
+      <li><a href="#conclusiones"><span class="num">07</span><span class="emoji">✍️</span> Conclusiones y reflexión<span class="arrow">→</span></a></li>
+      <li><a href="#referencias"><span class="num">08</span><span class="emoji">📚</span> Referencias bibliográficas<span class="arrow">→</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TEMA 11 -->
+<div id="t11">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">01</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Tema 11</span>
+      <h2>Códigos de alcance universal</h2>
+      <p class="tema-sub">Derechos Humanos, generaciones y la Declaración Universal de 1948</p>
+    </div>
+  </div>
+
+  <div class="content-block accent-block">
+    <h3>¿Qué es?</h3>
+    <p>Los Derechos Humanos representan el marco ético-jurídico más importante de la modernidad. No son un favor del Estado: son atributos inherentes a toda persona por el solo hecho de existir. La Declaración Universal, adoptada por la ONU en 1948, recoge 30 artículos que siguen siendo la referencia global.</p>
+    <p>Se organizan en tres generaciones históricas. La primera incluye los derechos civiles y políticos: vida, libertad, seguridad, prohibición de la tortura, derecho al voto. La segunda agrupa los derechos económicos, sociales y culturales: trabajo digno, educación, salud. La tercera generación contempla los derechos de solidaridad: medio ambiente sano, paz, desarrollo sostenible.</p>
+    <p>En México, la CNDH es el organismo encargado de promover, defender y difundir estos derechos frente a las autoridades. Su reconocimiento en la Constitución de 2011 fue un hito legislativo que elevó los DDHH a rango constitucional.</p>
+  </div>
+
+  <div class="why-box">
+    <h3>¿Por qué es esencial?</h3>
+    <p>Sin entender los derechos universales, no puede existir ninguna ética profesional coherente. Todo sistema tecnológico que toca datos de personas — asistencia, rendimiento, salud — opera dentro de este marco legal y moral. Ignorarlo no es neutralidad técnica: es complicidad pasiva.</p>
+  </div>
+
+  <div class="resources-grid">
+    <div class="resource-card" data-type="Video">
+      <span class="resource-icon">🎥</span>
+      <h4>¿Qué son los Derechos Humanos?</h4>
+      <p>Canal oficial de la CNDH México. Explicación accesible de las tres generaciones y su aplicación actual.</p>
+      <a href="https://www.youtube.com/watch?v=example" target="_blank">Ver en YouTube →</a>
+    </div>
+    <div class="resource-card" data-type="Imagen">
+      <span class="resource-icon">🖼️</span>
+      <h4>Infografía: Las 3 generaciones de DDHH</h4>
+      <p>Representación visual cronológica y temática de las tres generaciones de derechos fundamentales.</p>
+    </div>
+    <div class="resource-card" data-type="Liga">
+      <span class="resource-icon">🔗</span>
+      <h4>CNDH — Carta de Derechos</h4>
+      <p>Recursos oficiales, denuncias y educación en derechos humanos en México.</p>
+      <a href="https://www.cndh.org.mx" target="_blank">Visitar sitio →</a>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <p>Una empresa de manufactura que instala cámaras de reconocimiento facial en sus líneas de producción sin consentimiento explícito de los trabajadores viola el derecho a la privacidad (Art. 12 de la Declaración Universal). Cualquier sistema de monitoreo laboral debe incluir consentimiento informado, propósito declarado y mecanismos de apelación.</p>
+  </div>
+</section>
+</div>
+
+<!-- TEMA 12 -->
+<div id="t12" class="bg-cream">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">02</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Tema 12</span>
+      <h2>Ciudadanía y trabajo político</h2>
+      <p class="tema-sub">Participación activa, capital social y ciudadanía global</p>
+    </div>
+  </div>
+
+  <div class="content-block green-block">
+    <h3>¿Qué es?</h3>
+    <p>El Tema 12 establece una distinción fundamental: no es lo mismo ser <em>habitante</em> que ser <em>ciudadano</em>. El habitante ocupa un territorio. El ciudadano lo transforma. La ciudadanía es una práctica activa que implica informarse, votar con criterio, exigir rendición de cuentas y participar en la vida pública de manera continua.</p>
+    <p>La globalización ha ampliado el concepto. Hoy existe una ciudadanía global que reconoce responsabilidades más allá de las fronteras nacionales: ante el cambio climático, las migraciones, las desigualdades sistémicas. El profesionista del siglo XXI no puede ignorar estas dimensiones sin abdicar de su ciudadanía.</p>
+    <p>El capital social — la red de confianza y cooperación que une a una comunidad — es el recurso más valioso de cualquier sociedad democrática. Sin él, las instituciones se vacían de contenido y la participación ciudadana se vuelve performance.</p>
+  </div>
+
+  <div class="why-box">
+    <h3>¿Por qué es esencial?</h3>
+    <p>La indiferencia política es, en sí misma, una decisión política. Un ingeniero que diseña sistemas de automatización sin evaluar su impacto en el empleo local está ejerciendo su ciudadanía de forma pasiva. La ciudadanía activa exige preguntarse: ¿a quién beneficia lo que construyo, y a quién desplaza?</p>
+  </div>
+
+  <div class="resources-grid">
+    <div class="resource-card" data-type="Video">
+      <span class="resource-icon">🎥</span>
+      <h4>El valor del voto informado</h4>
+      <p>Instituto Nacional Electoral (INE). La diferencia entre votar por costumbre y votar con información.</p>
+      <a href="https://www.ine.mx" target="_blank">Ver recurso →</a>
+    </div>
+    <div class="resource-card" data-type="Imagen">
+      <span class="resource-icon">🖼️</span>
+      <h4>Tipos de ciudadanía: local, nacional y global</h4>
+      <p>Diagrama comparativo de las dimensiones de la ciudadanía contemporánea y sus responsabilidades.</p>
+    </div>
+    <div class="resource-card" data-type="Actividad">
+      <span class="resource-icon">🎮</span>
+      <h4>Quiz: ¿Qué tipo de ciudadano eres?</h4>
+      <p>Actividad lúdica interactiva (Kahoot) para reflexionar sobre el nivel de participación cívica personal.</p>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <p>Un ingeniero que automatiza una línea de producción en una fábrica en CIVAC sin considerar el impacto en el empleo de los operadores está fallando en su ciudadanía activa. La ciudadanía responsable exige evaluar ese impacto, proponer alternativas de reconversión laboral y comunicar los cambios con transparencia antes de implementarlos.</p>
+  </div>
+</section>
+</div>
+
+<!-- TEMA 13 -->
+<div id="t13" class="bg-dark">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">03</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Tema 13</span>
+      <h2>La carga teleológica</h2>
+      <p class="tema-sub">Ética para vivir mejor: diálogo, interdependencia y acción orientada al bien</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>¿Qué es?</h3>
+    <p>La carga teleológica es la idea de que toda acción humana tiende hacia un fin. La ética no es un conjunto de reglas externas impuestas por la sociedad — es la capacidad de alinear nuestras acciones con propósitos que generen bien para uno mismo y para la comunidad. Actuar bien no por miedo al castigo, sino porque entendemos hacia dónde conduce cada decisión.</p>
+    <p>El diálogo aparece como la herramienta central de la vida ética. No el debate para ganar, sino la conversación para comprender. La interdependencia — reconocer que mis decisiones afectan a otros — es el principio que convierte la ética individual en responsabilidad social.</p>
+    <p>Kohlberg identificó seis estadios del desarrollo moral, desde la obediencia por miedo hasta la adhesión a principios universales de justicia. La teoría de Rawls añade que el deber del profesionista es actuar con justicia incluso cuando el sistema no lo exige.</p>
+  </div>
+
+  <div class="why-box">
+    <h3>¿Por qué es esencial?</h3>
+    <p>Es el subtema más directamente aplicable a decisiones cotidianas de ingeniería y negocios. ¿El producto que construyo maximiza el bien de mis usuarios, o solo mis métricas? La teleología obliga a preguntarse: <em>¿hacia dónde lleva esto realmente, y a quién?</em></p>
+  </div>
+
+  <blockquote>"La pregunta ética no es solo '¿es esto legal?' sino '¿puedo defender públicamente esta decisión si todas sus consecuencias fueran conocidas?'"</blockquote>
+
+  <div class="resources-grid">
+    <div class="resource-card" data-type="Video">
+      <span class="resource-icon">🎥</span>
+      <h4>Ética aplicada en los negocios</h4>
+      <p>TED Talk sobre cómo las empresas pueden alinear rentabilidad y responsabilidad ética sin sacrificar ninguna.</p>
+    </div>
+    <div class="resource-card" data-type="Imagen">
+      <span class="resource-icon">🖼️</span>
+      <h4>Los círculos de influencia (Covey)</h4>
+      <p>Diagrama del área de control vs. área de preocupación para tomar decisiones con propósito y sin parálisis.</p>
+    </div>
+    <div class="resource-card" data-type="Liga">
+      <span class="resource-icon">🔗</span>
+      <h4>Ética de la IA en sistemas industriales</h4>
+      <p>MIT Technology Review. Las implicaciones éticas de automatizar decisiones que afectan a trabajadores.</p>
+      <a href="https://www.technologyreview.com" target="_blank">Leer artículo →</a>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <p>Un sistema de gestión de asistencia que reporta ausencias automáticamente sin contexto puede perjudicar injustamente a un empleado que tuvo una emergencia médica. El diseño ético exige incluir mecanismos de apelación, alertas contextuales y revisión humana antes de automatizar consecuencias que afecten la estabilidad laboral de una persona.</p>
+  </div>
+</section>
+</div>
+
+<!-- TEMA 14 -->
+<div id="t14">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">04</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Tema 14</span>
+      <h2>Entendimiento intercultural</h2>
+      <p class="tema-sub">Empatía, aceptación y valoración de la diversidad como competencia ética</p>
+    </div>
+  </div>
+
+  <div class="content-block blue-block">
+    <h3>¿Qué es?</h3>
+    <p>El Tema 14 diferencia entre dos modelos de globalización: la homogeneizante — todos deben hablar el mismo idioma, adoptar la misma cultura — y la de la diversidad, que reconoce que aprender del otro enriquece a ambos sin que ninguno pierda su identidad.</p>
+    <p>La empatía es la pieza central. Según Barreda (2020), la empatía va más allá de la comprensión intelectual: es un acto de escucha activa que requiere dejar en suspenso nuestros propios juicios para percibir genuinamente la experiencia del otro. No implica estar de acuerdo — implica reconocer la dignidad de la perspectiva ajena.</p>
+    <p>La aceptación no es aprobación incondicional. Es el reconocimiento de que el otro merece ser considerado en su totalidad como persona. La valoración de la diversidad, por su parte, transforma la diferencia de fuente de conflicto en ventaja cognitiva y social.</p>
+  </div>
+
+  <div class="why-box">
+    <h3>¿Por qué es esencial?</h3>
+    <p>En entornos laborales multiculturales, la falta de empatía intercultural genera conflictos costosos y productos que no funcionan para todos sus usuarios. Un SaaS diseñado exclusivamente desde la perspectiva del fundador fallará al onboardear a usuarios con contextos, edades y culturas organizacionales distintas.</p>
+  </div>
+
+  <div class="resources-grid">
+    <div class="resource-card" data-type="Video">
+      <span class="resource-icon">🎥</span>
+      <h4>The danger of a single story</h4>
+      <p>Chimamanda Ngozi Adichie — TED Talk. El riesgo de construir juicios sobre una cultura a partir de una sola narrativa.</p>
+      <a href="https://www.ted.com" target="_blank">Ver en TED →</a>
+    </div>
+    <div class="resource-card" data-type="Imagen">
+      <span class="resource-icon">🖼️</span>
+      <h4>Mapa cultural de Hofstede</h4>
+      <p>Las seis dimensiones culturales que explican cómo distintas sociedades toman decisiones, gestionan jerarquías y enfrentan la incertidumbre.</p>
+    </div>
+    <div class="resource-card" data-type="Actividad">
+      <span class="resource-icon">🎮</span>
+      <h4>Simulador de comunicación intercultural</h4>
+      <p>Intercultural Insights — ejercicio interactivo para identificar sesgos culturales propios y practicar la escucha empática.</p>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <p>Una plataforma de gestión industrial diseñada únicamente desde la perspectiva de un fundador joven y tecnológico fallará al implementarse en una fábrica donde los operadores tienen más de 50 años y culturas organizacionales distintas. El entendimiento intercultural es, también, diseño de usuario: implica salir del propio marco y construir desde el contexto del otro.</p>
+  </div>
+</section>
+</div>
+
+<!-- TEMA 15 -->
+<div id="t15" class="bg-cream">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">05</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Tema 15</span>
+      <h2>Desarrollo sustentable y el imperativo categórico</h2>
+      <p class="tema-sub">Responsabilidad intergeneracional y ética kantiana aplicada al siglo XXI</p>
+    </div>
+  </div>
+
+  <div class="content-block accent-block">
+    <h3>¿Qué es?</h3>
+    <p>El Tema 15 conecta la ética kantiana con la sostenibilidad contemporánea. El imperativo categórico de Kant establece: <em>actúa solo según principios que puedas desear que sean ley universal.</em> Aplicado al medio ambiente, la pregunta es: ¿podría el planeta sostenerse si todos actuaran como yo actúo?</p>
+    <p>El desarrollo sustentable busca satisfacer las necesidades del presente sin comprometer la capacidad de las generaciones futuras de satisfacer las suyas (Brundtland, 1987). La Agenda 2030 de la ONU traduce este principio en 17 Objetivos de Desarrollo Sostenible (ODS) que cubren desde la pobreza hasta el cambio climático.</p>
+    <p>La economía circular — alternativa al modelo lineal de producir, usar y desechar — es la expresión operativa de la sostenibilidad en la industria. Implica diseñar productos para que puedan ser reparados, reutilizados o reciclados al final de su vida útil.</p>
+  </div>
+
+  <div class="why-box">
+    <h3>¿Por qué es esencial?</h3>
+    <p>Toda decisión de ingeniería tiene un costo ambiental. Desde el consumo energético de los servidores en la nube hasta los materiales de los sensores IoT, cada componente de cualquier sistema tecnológico tiene una huella. Ignorarla no es solo irresponsabilidad — es actuar en contra del imperativo categórico.</p>
+  </div>
+
+  <div class="resources-grid">
+    <div class="resource-card" data-type="Video">
+      <span class="resource-icon">🎥</span>
+      <h4>Sustainability: the next disruptive force</h4>
+      <p>McKinsey Insights. Cómo la sostenibilidad está redefiniendo las reglas de competitividad empresarial global.</p>
+    </div>
+    <div class="resource-card" data-type="Imagen">
+      <span class="resource-icon">🖼️</span>
+      <h4>Los 17 ODS — ONU</h4>
+      <p>Mapa visual de los Objetivos de Desarrollo Sostenible 2030 y su interconexión sistémica.</p>
+      <a href="https://sdgs.un.org/es" target="_blank">Ver en ONU →</a>
+    </div>
+    <div class="resource-card" data-type="Actividad">
+      <span class="resource-icon">🎮</span>
+      <h4>Calculadora de huella de carbono</h4>
+      <p>Herramienta interactiva para medir el impacto ambiental personal y tomar decisiones más conscientes.</p>
+      <a href="https://www.huellacarbono.es" target="_blank">Calcular →</a>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <p>Una empresa industrial que utiliza un sistema de monitoreo energético en tiempo real no solo reduce costos operativos — está actuando conforme al imperativo categórico: tomando decisiones que, si fueran universales, mejorarían el estado del planeta. La sostenibilidad no es un costo adicional; es la condición de posibilidad de cualquier negocio de largo plazo.</p>
+  </div>
+</section>
+</div>
+
+<!-- JUSTIFICACIÓN -->
+<div id="justif" class="bg-dark">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">06</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Selección temática</span>
+      <h2>Justificación de los subtemas elegidos</h2>
+      <p class="tema-sub">¿Por qué estos cinco y no otros?</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Argumento central</h3>
+    <p>Estos cinco subtemas no son cinco temas aislados — son un sistema ético coherente. Cada uno responde a una pregunta distinta que enfrenta el profesionista del siglo XXI, y juntos forman un marco completo de actuación responsable.</p>
+  </div>
+
+  <div class="justif-grid">
+    <div class="justif-card">
+      <span class="emoji">📜</span>
+      <h4>T11 — Derechos Humanos: El marco legal</h4>
+      <p>Sin conocer los derechos universales, cualquier práctica profesional opera en un vacío normativo que tarde o temprano genera daño. Es el piso mínimo irrenunciable.</p>
+    </div>
+    <div class="justif-card green">
+      <span class="emoji">🗳️</span>
+      <h4>T12 — Ciudadanía: El mecanismo de participación</h4>
+      <p>El conocimiento de los derechos sin participación activa es letra muerta. La ciudadanía convierte el saber en acción colectiva que transforma instituciones y comunidades.</p>
+    </div>
+    <div class="justif-card blue">
+      <span class="emoji">⚖️</span>
+      <h4>T13 — Teleología: El motor de decisión individual</h4>
+      <p>Es el puente entre la teoría ética y la práctica cotidiana. Preguntarse "¿hacia dónde lleva esto?" antes de actuar es la diferencia entre cumplir y actuar con integridad.</p>
+    </div>
+    <div class="justif-card gold">
+      <span class="emoji">🌍</span>
+      <h4>T14 — Interculturalidad: La herramienta de relación</h4>
+      <p>En un mundo globalizado y multicultural, la empatía intercultural no es una virtud adicional — es una competencia profesional básica que determina la calidad de cualquier colaboración.</p>
+    </div>
+  </div>
+  <div style="margin-top: 1rem;">
+    <div class="justif-card ink" style="background: rgba(255,255,255,0.04); border-top-color: var(--gold);">
+      <span class="emoji">🌱</span>
+      <h4 style="color: white;">T15 — Sustentabilidad: La responsabilidad sistémica</h4>
+      <p style="color: #aaa;">La ética que no considera las generaciones futuras es una ética incompleta. La sostenibilidad es el criterio que da sentido de largo plazo a todas las decisiones anteriores.</p>
+    </div>
+  </div>
+
+  <div class="sistema-box">
+    <h3>Los cinco como sistema integrado</h3>
+    <div class="sistema-items">
+      <div class="sistema-item">
+        <span class="tema-label">T11 →</span>
+        <p><strong>Conozco</strong> mis derechos y los de quienes me rodean.</p>
+      </div>
+      <div class="sistema-item">
+        <span class="tema-label">T12 →</span>
+        <p><strong>Participo</strong> activamente en la vida pública y profesional.</p>
+      </div>
+      <div class="sistema-item">
+        <span class="tema-label">T13 →</span>
+        <p><strong>Decido</strong> con propósito, evaluando las consecuencias de mis acciones.</p>
+      </div>
+      <div class="sistema-item">
+        <span class="tema-label">T14 →</span>
+        <p><strong>Relaciono</strong> con empatía a personas de contextos distintos al mío.</p>
+      </div>
+      <div class="sistema-item">
+        <span class="tema-label">T15 →</span>
+        <p><strong>Actúo</strong> pensando en quienes vivirán las consecuencias de mis decisiones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CONCLUSIONES -->
+<div id="conclusiones">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">07</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Cierre del módulo</span>
+      <h2>Conclusiones y reflexión personal</h2>
+      <p class="tema-sub">Aprendizaje, impacto profesional e impacto personal</p>
+    </div>
+  </div>
+
+  <div class="concl-block">
+    <h3>La diferencia entre cumplir y actuar éticamente</h3>
+    <p>Este módulo me hizo replantear una distinción que parecía obvia pero no lo era: cumplir es hacer lo mínimo que la norma exige. Actuar éticamente es preguntarse "¿hacia dónde lleva esto realmente, y a quién afecta?" — que es exactamente la pregunta teleológica del Tema 13.</p>
+    <p>Un sistema puede ser perfectamente legal y profundamente injusto al mismo tiempo. El cumplimiento normativo es necesario pero no suficiente. La ética empieza donde termina la obligación.</p>
+  </div>
+
+  <div class="concl-block">
+    <h3>Impacto en mi vida profesional</h3>
+    <p>Como ingeniero mecatrónico y desarrollador de sistemas para industrias físicas, estos temas no son filosofía abstracta. Son el manual de operación de mis decisiones de producto: ¿A quién diseño? ¿Con qué valores? ¿Qué impacto tiene en los operadores, los dueños y el medio ambiente?</p>
+    <p>Cada funcionalidad que toca datos de personas — asistencia, rendimiento, consumo energético — es también una decisión ética. El imperativo categórico se convierte en mi nuevo criterio de diseño: si no pudiera defender públicamente esta decisión con todas sus consecuencias conocidas, no debería tomarla.</p>
+    <p>El entendimiento intercultural (T14) fue la revelación más práctica: el diseño de usuario <em>es</em> empatía aplicada. Si no puedo ponerme genuinamente en el lugar de quien va a usar lo que construyo — con su edad, su cultura organizacional, su nivel de alfabetización digital — tampoco puedo construirle algo que realmente le sirva.</p>
+  </div>
+
+  <div class="concl-block">
+    <h3>Impacto en mi vida personal</h3>
+    <p>En lo personal, este módulo me recuerda que ser ciudadano no es votar cada tres años. Es participar, cuestionar y construir desde donde estoy. Cuernavaca, las industrias locales, mi entorno inmediato — son mi contexto de ciudadanía activa antes que cualquier otra cosa.</p>
+    <p>La carga teleológica me obliga a ser más honesto sobre mis motivaciones: ¿actúo porque quiero construir algo valioso, o porque quiero el reconocimiento de haber construido algo? La distinción importa, porque determina qué sacrificios estoy dispuesto a hacer cuando nadie está mirando.</p>
+    <p>Finalmente, el desarrollo sustentable (T15) me coloca en una perspectiva temporal que va más allá de mis objetivos inmediatos. Las decisiones que tome hoy — tecnológicas, profesionales, cotidianas — dejan huellas que otros cargarán. Esa responsabilidad no me paraliza: me orienta.</p>
+  </div>
+
+  <blockquote>"La ética sin autocrítica es solo marketing. El aprendizaje real empieza cuando te preguntas cuándo actuaste mal y por qué."</blockquote>
+</section>
+</div>
+
+<!-- REFERENCIAS -->
+<div id="referencias" class="bg-dark">
+<section class="section fade-in">
+  <div class="section-divider"></div>
+  <div class="tema-header">
+    <div class="tema-num">08</div>
+    <div class="tema-header-content">
+      <span class="tema-tag">Fuentes</span>
+      <h2>Referencias bibliográficas</h2>
+      <p class="tema-sub">Formato APA — Séptima edición</p>
+    </div>
+  </div>
+
+  <ul class="ref-list">
+    <li>Comisión Nacional de los Derechos Humanos. (2023). <em>Declaración Universal de los Derechos Humanos.</em> CNDH México. https://www.cndh.org.mx</li>
+    <li>Barreda, P. (2020). <em>La empatía, aceptación incondicional y la autenticidad.</em> Universidad Mayor. https://www.universidadmayor.es/wp-content/uploads/2020/04/APUNTES-LA-EMPATIA-ACEPTACION-AUTENTICIDAD.pdf</li>
+    <li>Kant, I. (1785). <em>Fundamentación de la metafísica de las costumbres</em> (Trad. moderna). Editorial Tecnos.</li>
+    <li>Organización de las Naciones Unidas. (2015). <em>Objetivos de Desarrollo Sostenible — Agenda 2030.</em> ONU. https://sdgs.un.org/es</li>
+    <li>Rawls, J. (1971). <em>A Theory of Justice.</em> Harvard University Press.</li>
+    <li>Paz, O. (1950). <em>El laberinto de la soledad.</em> Fondo de Cultura Económica.</li>
+    <li>Kohlberg, L. (1981). <em>Essays on Moral Development.</em> Harper & Row.</li>
+    <li>Brundtland, G. H. (1987). <em>Our Common Future — Informe de la Comisión Mundial sobre Medio Ambiente y Desarrollo.</em> ONU.</li>
+    <li>Covey, S. R. (1989). <em>The 7 Habits of Highly Effective People.</em> Free Press.</li>
+  </ul>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Blog Académico · Módulo 3 — Ética, Ciudadanía y Humanismo en el Siglo XXI</p>
+  <p style="margin-top: 0.5rem;"><strong>Patricio</strong> · Ingeniería Mecatrónica · Tecmilenio Cuernavaca · LSHU1802</p>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
